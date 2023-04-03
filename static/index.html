@@ -275,9 +275,8 @@ function wsSetup() {
             debug("WebSocket Recv:" + msg.data);
             //XXX: TODO What are you going to do here?
             let data = JSON.parse(msg.data)
-            for (entity in data){
-                addEntity(entity, data[entity])
-            }
+            addEntity(Object.keys(data), data[entity])
+    
         } catch (e) {
             alert("socket on message: " + e);
         }
