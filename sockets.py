@@ -37,12 +37,13 @@ def send_all_json(obj):
     send_all(json.dumps(obj))
 class Client:
     def __init__(self):
-        self.queue = queue.Queue
+        self.queue = queue.Queue()
 
     def put(self, v):
         self.queue.put_nowait(v)
 
     def get(self):
+        print('got here')
         return self.queue.get()
 
 class World:
@@ -119,6 +120,7 @@ def subscribe_socket(ws):
     try:
         while True:
             # block here
+            print([method for method in dir(client) if callable(getattr(client, method))])
             msg = client.get()
             print("Got a message!")
             ws.send(msg)
